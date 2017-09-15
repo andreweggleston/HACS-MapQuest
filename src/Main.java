@@ -19,7 +19,7 @@ public class Main extends JPanel {
     public static void main(String[] args) {
         JFrame window = new JFrame("MapQuest!");
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        window.setBounds(0, 0, 800, 800); //(x, y, w, h)
+        window.setBounds(0, 0, 1200, 800); //(x, y, w, h)
         Main panel = new Main();
         panel.setFocusable(true);
         panel.grabFocus();
