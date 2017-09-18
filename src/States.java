@@ -20,6 +20,7 @@ public class States {
     public void draw(){
         try {
             img = ImageIO.read(new File(state+".png"));
+
         } catch (IOException e) {
         }
         Graphics g = img.getGraphics();
