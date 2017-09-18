@@ -12,18 +12,24 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.geom.Point2D;
 import java.io.IOException;
+import java.lang.reflect.Array;
 
 public class Main extends JPanel {
+    States[] list= new States[50];
+    int count=0;
+
     public Main(){
+
         addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent mouseEvent) {
-
+                System.out.println("list["+count+"]"+"= new States( x,"+mouseEvent.getX()+","+mouseEvent.getY()+")");
+                count++;
             }
 
             @Override
             public void mousePressed(MouseEvent mouseEvent) {
-                System.out.println("yeee");
+
             }
 
             @Override
