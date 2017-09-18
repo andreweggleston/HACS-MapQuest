@@ -15,15 +15,15 @@ import java.io.IOException;
 
 public class Main extends JPanel {
     public Main(){
-        MouseListener mouseListener= new MouseListener() {
+        addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent mouseEvent) {
-                System.out.println("yee");
+
             }
 
             @Override
             public void mousePressed(MouseEvent mouseEvent) {
-
+                System.out.println("yeee");
             }
 
             @Override
@@ -33,14 +33,15 @@ public class Main extends JPanel {
 
             @Override
             public void mouseEntered(MouseEvent mouseEvent) {
-
             }
 
             @Override
             public void mouseExited(MouseEvent mouseEvent) {
+                //called when mouse leaves the panel.
 
             }
-        };
+        });
+
     }
     public void paint(Graphics g){
         Graphics2D g2 = (Graphics2D)g;
