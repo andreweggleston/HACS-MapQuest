@@ -110,13 +110,16 @@ public class Main extends JPanel {
     public void paint(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
         BufferedImage img = null;
+        BufferedImage clip = null;
 
         try {
             img = ImageIO.read(new File("Images/Map.png"));
+            clip = ImageIO.read(new File("Images/clip.png"));
         } catch (IOException e) {
 
         }
         g2.drawImage(img, 0, 0, null);
+        g2.drawImage(clip, 865, 465, null);
         for (int i = 0; i <list.size() ; i++) {
             g2.setColor(Color.RED);
             g2.fillRect(list.get(i).x-10,list.get(i).y-10, 20,20);
