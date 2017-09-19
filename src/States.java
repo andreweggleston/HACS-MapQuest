@@ -11,7 +11,7 @@ public class States {
     int x,y;
     String state;
     BufferedImage img =null;
-    public States( int x2, int y2){
+    public States(String state, int x2, int y2){
         x=x2;
         y=y2;
 
@@ -24,6 +24,17 @@ public class States {
         }
         Graphics g = img.getGraphics();
         g.drawImage(img,x,y,null);
+    }
+    public boolean check(int x2, int y2){
+        if(Math.abs(x-x2)>20){
+            return false;
+        }
+        if(Math.abs(y-y2)>20){
+            return false;
+        }
+        return true;
+
+
     }
 
 }

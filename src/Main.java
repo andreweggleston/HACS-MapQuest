@@ -17,8 +17,9 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Main extends JPanel {
-    private ArrayList<States> list;
-    int count = 0;
+    private ArrayList<States> list = new ArrayList<States>();
+    private int count = 0;
+    private States answer= null;
 
 
     public Main() {
@@ -76,8 +77,11 @@ public class Main extends JPanel {
         addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent mouseEvent) {
-                System.out.println("list[" + count + "]" + "= new States( x," + mouseEvent.getX() + "," + mouseEvent.getY() + ")");
-                count++;
+                for (int i = 0; i <list.size() ; i++) {
+                    if(list.get(i).check(mouseEvent.getX(),mouseEvent.getY())){
+                        answer= list.get(i);
+                    }
+                }
             }
 
             @Override
@@ -113,6 +117,10 @@ public class Main extends JPanel {
 
         }
         g2.drawImage(img, 0, 0, null);
+        for (int i = 0; i <list.size() ; i++) {
+            g2.setColor(Color.RED);
+            g2.fillRect(list.get(i).x-10,list.get(i).y-10, 20,20);
+        }
 
 
     }
