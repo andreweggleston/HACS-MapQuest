@@ -30,7 +30,7 @@ public class Main extends JPanel {
         list.add(new States("California", 72, 296));
         list.add(new States("Colorado", 332, 290));
         list.add(new States("Connecticut", 911, 184));
-        list.add(new States("Delaware", 881, 256));
+        list.add(new States("Delaware", 906, 265));
         list.add(new States("Florida", 809, 518));
         list.add(new States("Georgia", 759, 427));
         list.add(new States("Hawaii", 349, 594));
@@ -61,7 +61,7 @@ public class Main extends JPanel {
         list.add(new States("Oklahoma", 492, 382));
         list.add(new States("Oregon", 97, 138));
         list.add(new States("Pennsylvania", 826, 221));
-        list.add(new States("Rhode Island", 933, 179));
+        list.add(new States("Rhode Island", 948, 195));
         list.add(new States("South Carolina", 803, 391));
         list.add(new States("South Dakota", 436, 160));
         list.add(new States("Tennessee", 688, 363));
@@ -111,15 +111,19 @@ public class Main extends JPanel {
         Graphics2D g2 = (Graphics2D) g;
         BufferedImage img = null;
 
+
         try {
             img = ImageIO.read(new File("Images/Map.png"));
         } catch (IOException e) {
 
         }
         g2.drawImage(img, 0, 0, null);
+        g2.setStroke(new BasicStroke(5));
+        g2.drawLine(948, 195, 933, 180);
+        g2.drawLine(906, 265, 882, 260);
         for (int i = 0; i <list.size() ; i++) {
             g2.setColor(Color.RED);
-            g2.fillRect(list.get(i).x-10,list.get(i).y-10, 20,20);
+            g2.fillOval(list.get(i).x-10,list.get(i).y-10, 20,20);
         }
 
 
