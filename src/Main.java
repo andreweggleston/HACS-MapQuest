@@ -110,14 +110,19 @@ public class Main extends JPanel {
     public void paint(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
         BufferedImage img = null;
+        BufferedImage clip = null;
+
 
 
         try {
             img = ImageIO.read(new File("Images/Map.png"));
+            clip = ImageIO.read(new File("Images/clip.png"));
+
         } catch (IOException e) {
 
         }
         g2.drawImage(img, 0, 0, null);
+        g2.drawImage(clip, 865, 460, null);
         g2.setStroke(new BasicStroke(5));
         g2.drawLine(948, 195, 933, 180);
         g2.drawLine(906, 265, 882, 260);
