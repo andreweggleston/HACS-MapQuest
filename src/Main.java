@@ -4,6 +4,8 @@
  */
 
 import javax.imageio.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.awt.*;
@@ -32,6 +34,10 @@ public class Main extends JPanel {
     private States Uranswer= null;
     private int right=0;
     private int wrong=0;
+
+    private Timer timer;
+    private int c;
+    private int z;
 
 
 
@@ -91,6 +97,22 @@ public class Main extends JPanel {
         }
         answer=list.get((int)(Math.random()*list.size()));
 
+
+        timer = new Timer(100, new ActionListener() {//seconds
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                z++;
+                if(z%10==0){
+                    z=0;
+                    c++;
+                }
+            }
+        });
+
+        timer.start();
+
+
+
         addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent mouseEvent) {
@@ -126,7 +148,7 @@ public class Main extends JPanel {
 
             @Override
             public void mousePressed(MouseEvent mouseEvent) {
-                c++;
+               // c++;
             }
 
             @Override
@@ -181,8 +203,20 @@ public class Main extends JPanel {
         }
 
         g2.drawString(c+"",0,750);
-        repaint();
+        Font currentFont = g.getFont();
+        Font newFont = currentFont.deriveFont(currentFont.getSize() * 2.4F);
+        g.setFont(newFont);
+        g2.drawString(c+"",55,750);
+        if(c<10) {
+            g2.drawString("." + z + "", 70, 750);
+        }else if (c<100){
+            g2.drawString("." + z, 90, 750);
 
+        }else
+            g2.drawString("." + z, 110, 750);
+
+
+        repaint();
 
     }
 
