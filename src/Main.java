@@ -79,7 +79,7 @@ public class Main extends JPanel {
         list.add(new States("Wyoming", 311, 191));
 
 
-        timer = new Timer(1, new ActionListener() {
+        timer = new Timer(2, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 c++;
