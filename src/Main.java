@@ -4,8 +4,6 @@
  */
 
 import javax.imageio.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.awt.*;
@@ -20,10 +18,21 @@ import java.util.ArrayList;
 
 public class Main extends JPanel {
     private ArrayList<States> list = new ArrayList<States>();
+    private ArrayList<States> used = new ArrayList<States>();
+
+    private ArrayList<Dot> cirs = new ArrayList<Dot>();
+    private ArrayList<Dot> usedCirs = new ArrayList<Dot>();
+
+
     private int count = 0;
+    private int spot;
+    private int c=0;
+    private boolean incorrect;
     private States answer= null;
-    private Timer timer;
-    private int c;
+    private States Uranswer= null;
+    private int right=0;
+    private int wrong=0;
+
 
 
     public Main() {
@@ -77,16 +86,42 @@ public class Main extends JPanel {
         list.add(new States("West Virginia", 786, 283));
         list.add(new States("Wisconsin", 612, 159));
         list.add(new States("Wyoming", 311, 191));
-
+        for (int i = 0; i <list.size() ; i++) {
+            cirs.add(new Dot(list.get(i).x,list.get(i).y));
+        }
+        answer=list.get((int)(Math.random()*list.size()));
 
         addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent mouseEvent) {
                 for (int i = 0; i <list.size() ; i++) {
                     if(list.get(i).check(mouseEvent.getX(),mouseEvent.getY())){
-                        answer= list.get(i);
+                        Uranswer=list.get(i);
+                        spot=i;
+
                     }
                 }
+
+                if (!Uranswer.equals(answer)){
+                    incorrect=true;
+                    wrong++;
+                }
+                if(Uranswer.equals(answer)){
+                    cirs.get(spot).setColor(Color.green);
+                    right++;
+                    used.add(list.get(spot));
+                    list.remove(spot);
+                    usedCirs.add(cirs.get(spot));
+                    cirs.remove(spot);
+                    if(list.size()!=0){
+                        answer= list.get((int) (Math.random()*list.size()));
+                    }
+
+                }
+
+
+
+
             }
 
             @Override
@@ -114,6 +149,7 @@ public class Main extends JPanel {
 
     public void paint(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
+        super.paint(g2);
         BufferedImage img = null;
         BufferedImage clip = null;
 
@@ -126,15 +162,24 @@ public class Main extends JPanel {
         } catch (IOException e) {
 
         }
+
         g2.drawImage(img, 0, 0, null);
         g2.drawImage(clip, 865, 460, null);
         g2.setStroke(new BasicStroke(5));
         g2.drawLine(948, 195, 933, 180);
         g2.drawLine(906, 265, 882, 260);
+        g2.drawString(answer.getState(),900,600);
+        Font font= new Font("Times New Roman",Font.BOLD,30);
+        g2.setFont(font);
+        g2.drawString(right +" Correct Answers",400,700);
+        g2.drawString(wrong +" Wrong Answer",400,740);
         for (int i = 0; i <list.size() ; i++) {
-            g2.setColor(Color.RED);
-            g2.fillOval(list.get(i).x-10,list.get(i).y-10, 20,20);
+            cirs.get(i).draw(g2);
         }
+        for (int i = 0; i <usedCirs.size() ; i++) {
+            usedCirs.get(i).draw(g2);
+        }
+
         g2.drawString(c+"",0,750);
         repaint();
 

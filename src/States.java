@@ -11,9 +11,10 @@ public class States {
     int x,y;
     String state;
     BufferedImage img =null;
-    public States(String state, int x2, int y2){
+    public States(String state2, int x2, int y2){
         x=x2;
         y=y2;
+        state=state2;
 
     }
     public void draw(){
@@ -35,6 +36,10 @@ public class States {
         return true;
 
 
+    }
+
+    public String getState() {
+        return state;
     }
 
 }
