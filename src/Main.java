@@ -4,6 +4,8 @@
  */
 
 import javax.imageio.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.awt.*;
@@ -20,6 +22,8 @@ public class Main extends JPanel {
     private ArrayList<States> list = new ArrayList<States>();
     private int count = 0;
     private States answer= null;
+    private Timer timer;
+    private int c;
 
 
     public Main() {
@@ -74,6 +78,7 @@ public class Main extends JPanel {
         list.add(new States("Wisconsin", 612, 159));
         list.add(new States("Wyoming", 311, 191));
 
+
         addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent mouseEvent) {
@@ -86,7 +91,7 @@ public class Main extends JPanel {
 
             @Override
             public void mousePressed(MouseEvent mouseEvent) {
-
+                c++;
             }
 
             @Override
@@ -130,6 +135,8 @@ public class Main extends JPanel {
             g2.setColor(Color.RED);
             g2.fillOval(list.get(i).x-10,list.get(i).y-10, 20,20);
         }
+        g2.drawString(c+"",0,750);
+        repaint();
 
 
     }
