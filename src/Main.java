@@ -95,6 +95,7 @@ public class Main extends JPanel {
         }
         answer=list.get((int)(Math.random()*list.size()));
 
+        c = 99;
 
         timer = new Timer(100, new ActionListener() {//seconds
             @Override
@@ -209,13 +210,13 @@ public class Main extends JPanel {
         g.setFont(newFont);
         g2.setColor(Color.red);
         g2.drawString(c+"",55,750);
-//        if(c<10) {
-//            g2.drawString("." + z + "", 70, 750);
-//        }else if (c<100){
-//            g2.drawString("." + z, 90, 750);
-//
-//        }else
-//            g2.drawString("." + z, 110, 750);
+        if(c<10) {
+            g2.drawString("." + z + "", 87, 750);
+        }else if (c<100){
+            g2.drawString("." + z, 127, 750);
+
+        }else
+            g2.drawString("." + z, 157, 750);
 
 
         repaint();
