@@ -28,8 +28,6 @@ public class Main extends JPanel {
 
     private int count = 0;
     private int spot;
-    private int c=0;
-    private boolean incorrect;
     private States answer= null;
     private States Uranswer= null;
     private int right=0;
@@ -91,7 +89,7 @@ public class Main extends JPanel {
         list.add(new States("Washington", 119, 59));
         list.add(new States("West Virginia", 786, 283));
         list.add(new States("Wisconsin", 612, 159));
-        list.add(new States("Wyoming", 311, 191));
+        list.add(new States("Wyoming", 311, 191)); // map make
         for (int i = 0; i <list.size() ; i++) {
             cirs.add(new Dot(list.get(i).x,list.get(i).y));
         }
@@ -125,7 +123,6 @@ public class Main extends JPanel {
                 }
 
                 if (!Uranswer.equals(answer)){
-                    incorrect=true;
                     wrong++;
                 }
                 if(Uranswer.equals(answer)){
@@ -202,18 +199,19 @@ public class Main extends JPanel {
             usedCirs.get(i).draw(g2);
         }
 
-        g2.drawString(c+"",0,750);
+        //g2.drawString(c+"",0,750);
         Font currentFont = g.getFont();
         Font newFont = currentFont.deriveFont(currentFont.getSize() * 2.4F);
         g.setFont(newFont);
+        g2.setColor(Color.red);
         g2.drawString(c+"",55,750);
-        if(c<10) {
-            g2.drawString("." + z + "", 70, 750);
-        }else if (c<100){
-            g2.drawString("." + z, 90, 750);
-
-        }else
-            g2.drawString("." + z, 110, 750);
+//        if(c<10) {
+//            g2.drawString("." + z + "", 70, 750);
+//        }else if (c<100){
+//            g2.drawString("." + z, 90, 750);
+//
+//        }else
+//            g2.drawString("." + z, 110, 750);
 
 
         repaint();
