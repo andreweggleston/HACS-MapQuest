@@ -123,7 +123,10 @@ public class Main extends JPanel {
                 }
 
                 if (!Uranswer.equals(answer)){
-                    wrong++;
+                    if(!Uranswer.equals(null)){
+                        wrong++;
+                    }
+
                 }
                 if(Uranswer.equals(answer)){
                     cirs.get(spot).setColor(Color.green);
@@ -139,6 +142,7 @@ public class Main extends JPanel {
                 }
 
 
+                Uranswer=null;
 
 
             }
