@@ -28,6 +28,7 @@ public class Main extends JPanel {
 
     private int count = 0;
     private int spot;
+    private int level=0;
     private States answer= null;
     private States Uranswer= null;
     private int right=0;
@@ -38,8 +39,7 @@ public class Main extends JPanel {
     private int z;
 
 
-
-    public Main() {
+    public void makelist(ArrayList<States> list){
         list.add(new States("Alabama", 695, 427));
         list.add(new States("Alaska", 117, 518));
         list.add(new States("Arizona", 206, 388));
@@ -89,13 +89,16 @@ public class Main extends JPanel {
         list.add(new States("Washington", 119, 59));
         list.add(new States("West Virginia", 786, 283));
         list.add(new States("Wisconsin", 612, 159));
-        list.add(new States("Wyoming", 311, 191)); // map make
+        list.add(new States("Wyoming", 311, 191));
+    }
+
+    public Main() {
+        makelist(list);
         for (int i = 0; i <list.size() ; i++) {
             cirs.add(new Dot(list.get(i).x,list.get(i).y));
         }
         answer=list.get((int)(Math.random()*list.size()));
 
-        c = 99;
 
         timer = new Timer(100, new ActionListener() {//seconds
             @Override
@@ -105,7 +108,23 @@ public class Main extends JPanel {
                     z=0;
                     c++;
                 }
+                if(list.size()==0){
+                    level++;
+                    z=0;
+                    makelist(list);
+                    for (int i = 0; i <list.size() ; i++) {
+                        cirs.add(new Dot(list.get(i).x,list.get(i).y));
+                    }
+                    for (int i = 0; i <used.size() ; i++) {
+                        used.remove(i);
+                        usedCirs.remove(i);
+                    }
+
+
+                }
             }
+
+
         });
 
         timer.start();
@@ -115,36 +134,39 @@ public class Main extends JPanel {
         addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent mouseEvent) {
-                for (int i = 0; i <list.size() ; i++) {
-                    if(list.get(i).check(mouseEvent.getX(),mouseEvent.getY())){
-                        Uranswer=list.get(i);
-                        spot=i;
+                System.out.println(mouseEvent.getX()+" "+mouseEvent.getY());
+                if(level==0) {
+                    for (int i = 0; i < list.size(); i++) {
+                        if (list.get(i).check(mouseEvent.getX(), mouseEvent.getY())) {
+                            Uranswer = list.get(i);
+                            spot = i;
+
+                        }
+                    }
+                    if (spot > 0) {
+                        if (!Uranswer.equals(answer)) {
+                            wrong++;
+                        }
 
                     }
-                }
 
-                if (!Uranswer.equals(answer)){
-                    if(!Uranswer.equals(null)){
-                        wrong++;
+                    if (spot > 0) {
+                        if (Uranswer.equals(answer)) {
+                            cirs.get(spot).setColor(Color.green);
+                            right++;
+                            used.add(list.get(spot));
+                            list.remove(spot);
+                            usedCirs.add(cirs.get(spot));
+                            cirs.remove(spot);
+                            if (list.size() != 0) {
+                                answer = list.get((int) (Math.random() * list.size()));
+                            }
+
+                        }
                     }
-
+                    spot = -1;
+                    //if(Math.abs(mouseEvent.getX()-800)<100&&Math.abs(mouseEvent.getY()))
                 }
-                if(Uranswer.equals(answer)){
-                    cirs.get(spot).setColor(Color.green);
-                    right++;
-                    used.add(list.get(spot));
-                    list.remove(spot);
-                    usedCirs.add(cirs.get(spot));
-                    cirs.remove(spot);
-                    if(list.size()!=0){
-                        answer= list.get((int) (Math.random()*list.size()));
-                    }
-
-                }
-
-
-                Uranswer=null;
-
 
             }
 
@@ -186,39 +208,42 @@ public class Main extends JPanel {
         } catch (IOException e) {
 
         }
+        if(level==0) {
+            g2.drawImage(img, 0, 0, null);
+            g2.drawImage(clip, 865, 460, null);
+            g2.setStroke(new BasicStroke(5));
+            g2.drawLine(948, 195, 933, 180);
+            g2.drawLine(906, 265, 882, 260);
+            g2.drawString(answer.getState(), 900, 600);
+            Font font = new Font("Times New Roman", Font.BOLD, 30);
+            g2.setFont(font);
+            g2.drawString(right + " Correct Answers", 400, 700);
+            g2.drawString(wrong + " Wrong Answer", 400, 740);
+            for (int i = 0; i < list.size(); i++) {
+                cirs.get(i).draw(g2);
+            }
+            for (int i = 0; i < usedCirs.size(); i++) {
+                usedCirs.get(i).draw(g2);
+            }
 
-        g2.drawImage(img, 0, 0, null);
-        g2.drawImage(clip, 865, 460, null);
-        g2.setStroke(new BasicStroke(5));
-        g2.drawLine(948, 195, 933, 180);
-        g2.drawLine(906, 265, 882, 260);
-        g2.drawString(answer.getState(),900,600);
-        Font font= new Font("Times New Roman",Font.BOLD,30);
-        g2.setFont(font);
-        g2.drawString(right +" Correct Answers",400,700);
-        g2.drawString(wrong +" Wrong Answer",400,740);
-        for (int i = 0; i <list.size() ; i++) {
-            cirs.get(i).draw(g2);
+            //g2.drawString(c+"",0,750);
+            Font currentFont = g.getFont();
+            Font newFont = currentFont.deriveFont(currentFont.getSize() * 2.4F);
+            g.setFont(newFont);
+            g2.setColor(Color.red);
+            g2.drawString(c + "", 55, 750);
+            if (c < 10) {
+                g2.drawString("." + z + "", 87, 750);
+            } else if (c < 100) {
+                g2.drawString("." + z, 127, 750);
+
+            } else
+                g2.drawString("." + z, 157, 750);
+
+            Font small= new Font("Times New Roman", Font.BOLD,22);
+            g2.setFont(small);
+            g2.drawString("End Game", 750,100);
         }
-        for (int i = 0; i <usedCirs.size() ; i++) {
-            usedCirs.get(i).draw(g2);
-        }
-
-        //g2.drawString(c+"",0,750);
-        Font currentFont = g.getFont();
-        Font newFont = currentFont.deriveFont(currentFont.getSize() * 2.4F);
-        g.setFont(newFont);
-        g2.setColor(Color.red);
-        g2.drawString(c+"",55,750);
-        if(c<10) {
-            g2.drawString("." + z + "", 87, 750);
-        }else if (c<100){
-            g2.drawString("." + z, 127, 750);
-
-        }else
-            g2.drawString("." + z, 157, 750);
-
-
         repaint();
 
     }
