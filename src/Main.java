@@ -104,10 +104,12 @@ public class Main extends JPanel {
         timer = new Timer(100, new ActionListener() {//seconds
             @Override
             public void actionPerformed(ActionEvent e) {
-                z++;
-                if(z%10==0){
-                    z=0;
-                    c++;
+                if(level==0) {
+                    z++;
+                    if (z % 10 == 0) {
+                        z = 0;
+                        c++;
+                    }
                 }
                 if(list.size()==0){
                     level++;
@@ -135,7 +137,7 @@ public class Main extends JPanel {
         addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent mouseEvent) {
-                if(level==0){
+                if(level==1){
                     x = mouseEvent.getX();
                     y = mouseEvent.getY();
                 }else {
@@ -256,7 +258,7 @@ public class Main extends JPanel {
             g2.setColor(Color.CYAN);
             g2.setFont(new Font("Courier", Font.BOLD,100));
             g2.drawString("PLAY", 400, 400);
-            if(x<550&&x>250&&y>250&&y<550) {
+            if(x<650&&x>250&&y>250&&y<500) {
                 System.out.println("yee");
                 level = 0;
                 repaint();
