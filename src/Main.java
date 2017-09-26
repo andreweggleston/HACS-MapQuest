@@ -41,8 +41,8 @@ public class Main extends JPanel {
 
 
     public void makelist(ArrayList<States> list){
-        list.add(new States("Alabama", 695, 427));
         list.add(new States("Alaska", 117, 518));
+        list.add(new States("Alabama", 695, 427));
         list.add(new States("Arizona", 206, 388));
         list.add(new States("Arkansas", 580, 389));
         list.add(new States("California", 72, 296));
@@ -150,14 +150,14 @@ public class Main extends JPanel {
 
                             }
                         }
-                        if (spot > 0) {
+                        if (spot >= 0) {
                             if (!Uranswer.equals(answer)) {
                                 wrong++;
                             }
 
                         }
 
-                        if (spot > 0) {
+                        if (spot >= 0) {
                             if (Uranswer.equals(answer)) {
                                 cirs.get(spot).setColor(Color.green);
                                 right++;
