@@ -28,7 +28,7 @@ public class Main extends JPanel {
 
     private int count = 0;
     private int spot;
-    private int level=1;
+    private int level=0;
     private States answer= null;
     private States Uranswer= null;
     private int right=0;
@@ -104,7 +104,7 @@ public class Main extends JPanel {
         timer = new Timer(100, new ActionListener() {//seconds
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(level==0) {
+                if(level==1) {
                     z++;
                     if (z % 10 == 0) {
                         z = 0;
@@ -137,12 +137,12 @@ public class Main extends JPanel {
         addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent mouseEvent) {
-                if(level==1){
+                if(level==0){
                     x = mouseEvent.getX();
                     y = mouseEvent.getY();
                 }else {
                     System.out.println(mouseEvent.getX() + " " + mouseEvent.getY());
-                    if (level == 0) {
+                    if (level == 1) {
                         for (int i = 0; i < list.size(); i++) {
                             if (list.get(i).check(mouseEvent.getX(), mouseEvent.getY())) {
                                 Uranswer = list.get(i);
@@ -216,7 +216,7 @@ public class Main extends JPanel {
         } catch (IOException e) {
 
         }
-        if(level==0) {
+        if(level==1) {
             g2.drawImage(img, 0, 0, null);
             g2.drawImage(clip, 865, 460, null);
             g2.setStroke(new BasicStroke(5));
@@ -251,7 +251,7 @@ public class Main extends JPanel {
             Font small= new Font("Times New Roman", Font.BOLD,22);
             g2.setFont(small);
             g2.drawString("End Game", 750,100);
-        }else if(level==1){
+        }else if(level==0){
             g2.setFont(new Font("Courier", Font.BOLD,50));
             g2.setColor(Color.GREEN);
             g2.drawString("Menu", 450,50);
@@ -259,7 +259,7 @@ public class Main extends JPanel {
             g2.setFont(new Font("Courier", Font.BOLD,100));
             g2.drawString("PLAY", 400, 400);
             if(x<650&&x>250&&y>250&&y<500) {
-                level = 0;
+                level = 1;
                 repaint();
             }
             repaint();
