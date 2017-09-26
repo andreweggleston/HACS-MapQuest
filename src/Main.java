@@ -28,7 +28,7 @@ public class Main extends JPanel {
 
     private int count = 0;
     private int spot;
-    private int level=0;
+    private int level=1;
     private States answer= null;
     private States Uranswer= null;
     private int right=0;
@@ -37,6 +37,7 @@ public class Main extends JPanel {
     private Timer timer;
     private int c;
     private int z;
+    private int x,y;
 
 
     public void makelist(ArrayList<States> list){
@@ -134,38 +135,43 @@ public class Main extends JPanel {
         addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent mouseEvent) {
-                System.out.println(mouseEvent.getX()+" "+mouseEvent.getY());
-                if(level==0) {
-                    for (int i = 0; i < list.size(); i++) {
-                        if (list.get(i).check(mouseEvent.getX(), mouseEvent.getY())) {
-                            Uranswer = list.get(i);
-                            spot = i;
+                if(level==0){
+                    x = mouseEvent.getX();
+                    y = mouseEvent.getY();
+                }else {
+                    System.out.println(mouseEvent.getX() + " " + mouseEvent.getY());
+                    if (level == 0) {
+                        for (int i = 0; i < list.size(); i++) {
+                            if (list.get(i).check(mouseEvent.getX(), mouseEvent.getY())) {
+                                Uranswer = list.get(i);
+                                spot = i;
 
+                            }
                         }
-                    }
-                    if (spot > 0) {
-                        if (!Uranswer.equals(answer)) {
-                            wrong++;
-                        }
-
-                    }
-
-                    if (spot > 0) {
-                        if (Uranswer.equals(answer)) {
-                            cirs.get(spot).setColor(Color.green);
-                            right++;
-                            used.add(list.get(spot));
-                            list.remove(spot);
-                            usedCirs.add(cirs.get(spot));
-                            cirs.remove(spot);
-                            if (list.size() != 0) {
-                                answer = list.get((int) (Math.random() * list.size()));
+                        if (spot > 0) {
+                            if (!Uranswer.equals(answer)) {
+                                wrong++;
                             }
 
                         }
+
+                        if (spot > 0) {
+                            if (Uranswer.equals(answer)) {
+                                cirs.get(spot).setColor(Color.green);
+                                right++;
+                                used.add(list.get(spot));
+                                list.remove(spot);
+                                usedCirs.add(cirs.get(spot));
+                                cirs.remove(spot);
+                                if (list.size() != 0) {
+                                    answer = list.get((int) (Math.random() * list.size()));
+                                }
+
+                            }
+                        }
+                        spot = -1;
+                        //if(Math.abs(mouseEvent.getX()-800)<100&&Math.abs(mouseEvent.getY()))
                     }
-                    spot = -1;
-                    //if(Math.abs(mouseEvent.getX()-800)<100&&Math.abs(mouseEvent.getY()))
                 }
 
             }
@@ -243,6 +249,19 @@ public class Main extends JPanel {
             Font small= new Font("Times New Roman", Font.BOLD,22);
             g2.setFont(small);
             g2.drawString("End Game", 750,100);
+        }else if(level==1){
+            g2.setFont(new Font("Courier", Font.BOLD,50));
+            g2.setColor(Color.GREEN);
+            g2.drawString("Menu", 450,50);
+            g2.setColor(Color.CYAN);
+            g2.setFont(new Font("Courier", Font.BOLD,100));
+            g2.drawString("PLAY", 400, 400);
+            if(x<550&&x>250&&y>250&&y<550) {
+                System.out.println("yee");
+                level = 0;
+                repaint();
+            }
+            repaint();
         }
         repaint();
 
