@@ -259,7 +259,6 @@ public class Main extends JPanel {
             g2.setFont(new Font("Courier", Font.BOLD,100));
             g2.drawString("PLAY", 400, 400);
             if(x<650&&x>250&&y>250&&y<500) {
-                System.out.println("yee");
                 level = 0;
                 repaint();
             }
