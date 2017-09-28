@@ -141,7 +141,7 @@ public class Main extends JPanel {
                     x = mouseEvent.getX();
                     y = mouseEvent.getY();
                 }else {
-                    System.out.println(mouseEvent.getX() + " " + mouseEvent.getY());
+                  //  System.out.println(mouseEvent.getX() + " " + mouseEvent.getY());
                     if (level == 1) {
                         for (int i = 0; i < list.size(); i++) {
                             if (list.get(i).check(mouseEvent.getX(), mouseEvent.getY())) {
