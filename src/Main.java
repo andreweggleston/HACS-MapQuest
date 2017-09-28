@@ -206,12 +206,14 @@ public class Main extends JPanel {
         super.paint(g2);
         BufferedImage img = null;
         BufferedImage clip = null;
+        BufferedImage yee = null;
 
 
 
         try {
             img = ImageIO.read(new File("Images/Map.png"));
             clip = ImageIO.read(new File("Images/clip.png"));
+            yee = ImageIO.read(new File("Images/1.png"));
 
         } catch (IOException e) {
 
@@ -252,6 +254,7 @@ public class Main extends JPanel {
             g2.setFont(small);
             g2.drawString("End Game", 750,100);
         }else if(level==0){
+            g2.drawImage(yee, 0, 0, null);
             g2.setFont(new Font("Courier", Font.BOLD,50));
             g2.setColor(Color.GREEN);
             g2.drawString("Menu", 450,50);
