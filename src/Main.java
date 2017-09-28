@@ -27,7 +27,7 @@ public class Main extends JPanel {
 
 
     private int count = 0;
-    private int spot;
+    private int spot=-1;
     private int level=0;
     private States answer= null;
     private States Uranswer= null;
@@ -171,8 +171,30 @@ public class Main extends JPanel {
 
                             }
                         }
+                        if(Math.abs(mouseEvent.getX()-795)<100&Math.abs(mouseEvent.getY()-95)<20){
+                            level=2;
+                        }
                         spot = -1;
                         //if(Math.abs(mouseEvent.getX()-800)<100&&Math.abs(mouseEvent.getY()))
+                    }
+                }
+                if(level==2){
+                    System.out.println(mouseEvent.getX()+" "+mouseEvent.getY());
+                    if(Math.abs(mouseEvent.getX()-470)<150&Math.abs(mouseEvent.getY()-190)<25){
+                        used.clear();
+                        usedCirs.clear();
+                        list.clear();
+                        cirs.clear();
+                        right=0;
+                        wrong=0;
+                        makelist(list);
+                        for (int i = 0; i <list.size() ; i++) {
+                            cirs.add(new Dot(list.get(i).x,list.get(i).y));
+                        }
+                        answer = list.get((int) (Math.random() * list.size()));
+
+
+                        level=1;
                     }
                 }
 
@@ -266,6 +288,14 @@ public class Main extends JPanel {
                 repaint();
             }
             repaint();
+        }
+        if(level==2){
+            g2.setFont(new Font("Courier", Font.BOLD,50));
+            g2.setColor(Color.GREEN);
+            g2.drawString("You got "+right+" Correct",330,300);
+            g2.drawString("You got "+wrong+" Wrong",330,250);
+            g2.drawString("Play again",330,200);
+
         }
         repaint();
 
